@@ -33,3 +33,150 @@ we can estimate the probability of x as follows:</br>
 P(C/x)=P(C).∏P(xi/C)</br>
 </li>
 </ul>
+
+<h3>SYSTEM ARCHITECTURE</h3>
+<h3>MODULES-</h3>
+
+➢ Feature Extractor: Feature Extraction is a process to reduce dimensionality of text by converting it into more 
+manageable groups for further processing. It combines the variables into features, 
+reducing the amount of data to be processed while still precisely describing original data. 
+This reduces amount of redundant data. All the raw tweets in the csv file are converted 
+into feature vectors to fit into the training dataset for SVM.
+
+➢ Data Preparation: Initially, the data needs to be prepared for classification. This is done by tokenization, 
+data cleaning, removing noise and regular expressions.
+
+➢ Classifier Model: Classifier model is used to classify the text as either hate-speech or non hate-speech 
+according to the percentage of embedded sentiment assigned to it by the sentiment 
+analyzer. The classifier model is prepared by training SVM and Naive Bayes on training 
+datasets and finally evaluating their performance on the testing dataset.
+
+![image](https://user-images.githubusercontent.com/62890614/227709745-16ccc49e-ef54-4c77-bf4c-9f17439858a3.png)
+
+Fig1. Architecture Diagram
+
+
+This process can be explained with the help of an example like: -
+
+![image](https://user-images.githubusercontent.com/62890614/227709809-e934f983-a416-43be-8fef-9bcb37037129.png)
+
+
+Fig2. Same Text Implementation
+
+
+Firstly, the data is tokenized, that is, it is split up into smaller parts called tokens. The punkt 
+tokenizer package is used, which splits the strings into sentences and words. Normalization 
+groups together words with same meaning, for example, “run”, “ran” and “runs”. This 
+reduces the redundancy in the training data. Lemmatization analyses the structure of the word 
+and converts it into normalized form. The tagging algorithm evaluates the context of the 
+words in the data. For example, NN for noun and VB for verb. In the figure, it can be noticed 
+that, “being” changes to “be”, which is its’ root word. Noise means unnecessary text. Noise 
+reduction is done via Regular Expressions to remove hyperlinks, social media handles, 
+punctuation and more. In this step, all the text is converted into lowercase. The common 
+words appearing in negative and positive texts according to the training data are identified 
+using the FreqDist class of NLTK. From the figure, it can be seen that smiling emoticon is 
+commonly present in positive sentences. The negative to positive ratios are assigned to the 
+words of the training dataset. The cleaned data are converted into a dictionary, which is 
+randomly shuffled into a dataset and split for training and testing.
+
+<h3>DATA FLOW DESIGN</h3>
+
+![image](https://user-images.githubusercontent.com/62890614/227709914-89ae3db5-f7e6-45b6-a709-80145f6fa68a.png)
+
+In Data flow Diagram it is explained how the raw data flows and eventually turns into the 
+required information that we need for hate speech detection. First the raw data that is tweets 
+are taken and its features are extracted which are basically the words without verbs etc. Then 
+the rest of the data is cleaned. And when we get only cleaned and meaningful words from the 
+text, then we apply classification algorithm to understand the polarity of the sentence and also 
+whether it points towards cyberbullying or not.
+
+<h3>CLASS DIAGRAM</h3>
+
+![image](https://user-images.githubusercontent.com/62890614/227709977-cbd3dfb6-7722-4bf4-ba36-42cb8a404744.png)
+
+
+The class diagram represents the entities and classes that are involved in Hate Speech 
+Detection process. The classes have their properties and respective functions which are 
+shown in the class diagram above.
+
+<hr>
+
+<p>The methodology behind the annotation process is simplistic. Natural language processing 
+(NLP) which converts all the texts into numerals and vectorize them which are easily 
+understandable by the machine. To proceed with our motivation, data cleaning must be done. 
+Feature Extraction is a process to reduce dimensionality of text by converting it into more 
+manageable groups for further processing. It combines the variables into features, reducing 
+the amount of data to be processed while still precisely describing original data. This reduces 
+amount of redundant data.
+The method of feature extraction used in this project is Bag-of-words. It uses NLP to extract 
+words and classify them by frequency of occurrence. This includes removing stop words, 
+stemming, tokenization, etc. Once the data is clean, the method of classification to be used is 
+sentiment analysis for hate speech detection. Sentiment analysis is the process of analysing 
+text I order to determine its’ emotional tone. It will categorize a line as positive or negative 
+using sentiment score which reflects the depth of emotions in the text. Sentiment Analysis is 
+24
+mostly used as a classification tool that analyses the social media text and indicates if the 
+emotion behind the text is positive or negative.
+After the data is separated based on sentiment, now we need to classify the data as hateful or 
+not and for this task we need a classifier model .Classifier model is used to classify the text as 
+‘hate speech’ or ‘non-hate speech’ according to the percentage of embedded sentiment 
+assigned to it by the sentiment analyser. 
+The rule based algorithms’ aim is to identify and utilize a set of related rules that is capable of 
+representing the information gained by the system. After this is done, we need a classifier 
+model for classifying the data and for that we have used is Naïve Bayes Algorithm. This 
+classifier was created using existing computing tools. We used to scikit-learn a python 
+package than implements most of the machine learning algorithms including naïve Bayes 
+algorithm and feature extraction techniques. The classifier model is created using the 
+multinomial () function which is part the scikit-learn package. The package also contains 
+functions like Count Vectorizer () for bag of words implementation and transforming 
+documents to feature vectors. 
+In addition to Naïve Bayes Algorithm, SVM is also used as a comparative analysis for greater 
+accuracy of classification. SVM (Support Vector Machine) is a supervised machine learning 
+algorithm used as a classifier. The values are plotted and a hyperplane is chosen in such a 
+way that it maximizes the margin of the training data. Once the training is done, the input 
+data is processed by the classifier as positive or negative indicating presence of cyber 
+bullying or not.
+Both, SVM (Support Vector machine) and Naïve Bayes algorithm have been used to create a 
+classification model. The test data is classified by both the models separately, and, on 
+comparison of the results, a cumulative result is shown; whether text is ‘cyber bullying 
+detected’ or ‘ cyber bullying not detected’.</p>
+
+<h3>RESULTS !! <h3>
+
+![image](https://user-images.githubusercontent.com/62890614/227710194-e67abe18-42eb-4ab5-8a4d-b0aca759788e.png)
+
+![image](https://user-images.githubusercontent.com/62890614/227710214-a643e4a8-05b0-4af5-81ef-8c4521ca820f.png)
+
+![image](https://user-images.githubusercontent.com/62890614/227710245-fea2d433-8c65-45ec-ac36-38fdebf7edc9.png)
+
+![image](https://user-images.githubusercontent.com/62890614/227710279-07459918-26b3-460e-8012-4f84ff974fc4.png)
+
+![image](https://user-images.githubusercontent.com/62890614/227710304-09f58866-cc36-4d17-9eee-89be6144c438.png)
+
+<h3>CONCLUSION & FUTURE WORK</h3>
+
+Based on the objectives of this study, we were able to create a hate speech classifier using 
+Naive Bayes algorithm and SVM. We were also able to collect and label a number of tweets 
+from twitter website and used the labelled dataset to test and train the hate speech classifier.
+We managed to get an average precision score of 95%.
+One of the limitations when using Naïve Bayes algorithm is the assumption of independent 
+features. This is not the ideal situation when dealing with tweets or any others documents. 
+
+Despite this limitation, Naïve Bayes still performs well and can be enhanced by using more 
+trigrams or longer word combinations. 
+
+Although SVM is good for text classification but SVM algorithm is not suitable for large data 
+sets and large texts .Also one major drawback that is faced using this system is that it does 
+not read false positive and true negative comments. For example .if the text says ,”I am not 
+very happy”, then the application might take the word “very” and “happy” and consider it to 
+be positive which is wrong. Also, the application is unable to read GIFS and audio and videos 
+.Another area where it can be improved in future s that it presently reads and analyses text 
+which is written only in English language and people also sometimes use regional language 
+which then changes the sentiment of the overall text sometimes.
+Also, the application is unable to read and understand any sarcastic comment. For example ,if 
+the text says ,”oh my god ,you are so intelligent ,hahaha” ,the application would consider it as 
+a positive comment .All these are areas which show a way for improvement in this 
+application in future.
+This research will add to the body of knowledge in the field of curbing online hate, online 
+hate speech monitoring, social media data mining and application of machine learning 
+algorithms to solve real life problems
